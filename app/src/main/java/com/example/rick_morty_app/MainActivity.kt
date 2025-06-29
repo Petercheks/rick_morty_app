@@ -1,12 +1,9 @@
 package com.example.rick_morty_app
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +26,19 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = Adapter(personajesList)
         recyclerView.adapter = adapter
+
+        adapter.onItemClickListener = { personaje ->
+            val intent = Intent(this, DetailActivity::class.java)
+
+            intent.putExtra("nombre", personaje.name)
+            intent.putExtra("imagen_personaje", personaje.image)
+            intent.putExtra("species", personaje.species)
+            intent.putExtra("status", personaje.status)
+            intent.putExtra("origen_name", personaje.origin.name)
+            intent.putExtra("ubicacion_name", personaje.location.name)
+
+            startActivity(intent)
+        }
 
         getPersonajes()
     }

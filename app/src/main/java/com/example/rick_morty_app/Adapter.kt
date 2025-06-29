@@ -31,7 +31,6 @@ class Adapter(private val personajes: List<Personaje>) : RecyclerView.Adapter<Ad
                 .load(personaje.image)
                 .into(imagenPersonaje)
 
-            // --- Logica para el icono de especie ---
             when (personaje.species) {
                 "Human" -> imagenGenero.setImageResource(R.drawable.human)
                 else -> imagenGenero.setImageResource(R.drawable.alien)
