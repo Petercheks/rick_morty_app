@@ -3,6 +3,7 @@ package com.example.rick_morty_app
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +16,30 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: Adapter
+    private lateinit var buttonTodos: Button
+    private lateinit var buttonHumanos: Button
+    private lateinit var buttonAliens: Button
     private var personajesList = mutableListOf<Personaje>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        buttonTodos = findViewById(R.id.buttonAll)
+        buttonHumanos = findViewById(R.id.buttonHumanos)
+        buttonAliens = findViewById(R.id.buttonAliens)
+
+        buttonTodos.setOnClickListener {
+            getPersonajes()
+        }
+
+        buttonHumanos.setOnClickListener {
+            getPersonajes(species = "humans")
+        }
+
+        buttonAliens.setOnClickListener {
+            getPersonajes(species = "aliens")
+        }
 
         recyclerView = findViewById(R.id.recyclerViewPersonajes)
 
@@ -44,13 +64,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun getPersonajes() {
+    private fun getPersonajes(species: String? = null) {
+        val path = when (species) {
+            "humans" -> HUMANOS
+            "aliens" -> ALIENS
+            else -> TODOS
+        }
+
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(ApiService::class.java).getPersonajes(TODOS)
+            val call = getRetrofit().create(ApiService::class.java).getPersonajes(path)
             val response = call.body()
 
             runOnUiThread {
                 if (call.isSuccessful) {
+                    personajesList.clear()
+
                     val personajes = response?.results
                     personajes?.forEach {
                         personajesList.add(it)
@@ -71,5 +99,7 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val BASE_URL = "https://rickandmortyapi.com/api/"
         const val TODOS = "character"
+        const val HUMANOS = "character?species=Human"
+        const val ALIENS = "character?species=Alien"
     }
 }

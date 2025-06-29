@@ -18,29 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Spinner
-            android:id="@+id/spinnerStatus"
+        <Button
+            android:id="@+id/buttonAll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:background="@drawable/rick_and_morty_spinner_bg"
-            android:entries="@array/status_options"
-            android:padding="12dp"
-            android:spinnerMode="dropdown"
-            tools:listitem="@android:layout/simple_spinner_item" />
+            android:text="@string/todos"/>
 
-        <Spinner
-            android:id="@+id/spinnerSpecies"
+        <Button
+            android:id="@+id/buttonHumanos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/rick_and_morty_spinner_bg"
-            android:entries="@array/species_options"
-            android:padding="12dp"
-            android:spinnerMode="dropdown"
-            tools:listitem="@android:layout/simple_spinner_item" />
+            android:text="@string/humanos"/>
+
+        <Button
+            android:id="@+id/buttonAliens"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/aliens"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

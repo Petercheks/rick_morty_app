@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">rick_morty_app</string>
     <string name="f1logo" />
+    <string name="todos">Todos</string>
+    <string name="humanos">Humanos</string>
+    <string name="aliens">Aliens</string>
 
     <string-array name="status_options">
         <item>Status</item>
