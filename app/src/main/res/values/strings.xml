@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">rick_morty_app</string>
+    <string name="f1logo" />
+
+    <string-array name="status_options">
+        <item>Status</item>
+        <item>Alive</item>
+        <item>Dead</item>
+        <item>Unknown</item>
+    </string-array>
+
+    <string-array name="species_options">
+        <item>Species</item>
+        <item>Human</item>
+        <item>Alien</item>
+    </string-array>
+</resources>
